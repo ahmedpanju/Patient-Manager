@@ -1,0 +1,18 @@
+$(document).ready(function(){
+    $('.edit_date').click(function(){
+        $('.date_input').fadeIn();
+        $(this).fadeOut();
+    });
+    $('.edit_height').click(function(){
+        $('.height_input').fadeIn();
+        $(this).fadeOut();
+    });
+    $('.edit_weight').click(function(){
+        $('.weight_input').fadeIn();
+        $(this).fadeOut();
+    });
+    $('.edit_symptoms').click(function(){
+        $('.symptoms_input').fadeIn();
+        $(this).fadeOut();
+    });
+});

@@ -1,0 +1,73 @@
+<HTML>
+    <head>
+        <title><%= title %></title>
+        <link rel="stylesheet" href="/css/<%= style %>">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/69ba8fe85f.js"></script>
+    </head>
+    <body>
+        <div class="add_patient">
+            <h1>New Patient</h1>
+            <form action="/add_patient" method="post">
+                <label>Name:</label><br>
+                <input type="text" name="name"><br><br>
+                <label>Date of Birth:</label><br>
+                <input type="date" name="dob"><br><br>
+                <label>Height(cm):</label><br>
+                <input type="number" name="height"><br><br>
+                <label>Weight(kg):</label><br>
+                <input type="number" name="weight"><br><br>
+                <label>Symptoms:</label><br>
+                <textarea name="symptoms"></textarea><br><br>
+                <input type="submit" value="Add Patient">
+            </form>
+        </div>   
+        <div class="patient_list">
+            <h1>Patients</h1>
+            <% if (patients.length == 0) { %>
+                <p style="text-align:center;">No Patients Added Yet</p>    
+            <% } else { %>
+                <% for (var i = 0; i < patients.length; i++) { %>
+                <div class="patient_single">
+                    <div class="patient_info" style="position: relative;">
+                        <h3><%= patients[i].name %></h3>
+                        <p class="date_text">Date of Birth: <%= patients[i].dob %></p>
+                        <form class="date_input" action="/update_date" method="post" style="position: relative; display: none;">
+                            <input type="hidden" name="patient_id" value="<%= patients[i]._id%>">
+                            <input type="date" name="date">
+                            <input type="submit" value="Update">
+                        </form>
+                        <button class="edit_date">Edit</button>
+                        <p class="height_text">Height: <%= patients[i].height %>cm</p>
+                        <form class="height_input" action="/update_height" method="post" style="position: relative; display: none;">
+                            <input type="hidden" name="patient_id" value="<%= patients[i]._id%>">
+                            <input type="number" name="height">
+                            <input type="submit" value="Update">
+                        </form>
+                        <button class="edit_height">Edit</button>
+                        <p class="weight_text">Weight: <%= patients[i].weight %>kg</p>
+                        <form class="weight_input" action="/update_weight" method="post" style="position: relative; display: none;">
+                            <input type="hidden" name="patient_id" value="<%= patients[i]._id%>">
+                            <input type="number" name="weight">
+                            <input type="submit" value="Update">
+                        </form>
+                        <button class="edit_weight">Edit</button>
+                        <p class="symptoms_text">Symptoms: <%= patients[i].symptoms %></p>
+                        <form class="symptoms_input" action="/update_symptoms" method="post" style="position: relative; display: none;">
+                            <input type="hidden" name="patient_id" value="<%= patients[i]._id%>">
+                            <textarea name="symptoms"></textarea>
+                            <input type="submit" value="Update">
+                        </form>
+                        <button class="edit_symptoms">Edit</button>
+                        <form style="position: absolute; top: 5%; right: 5%;" action="/delete_patient" method="post">
+                            <input type="hidden" name="patient_id" value="<%= patients[i]._id%>">
+                            <input type="submit" value="Delete Patient">
+                        </form>
+                    </div>
+                </div>
+                <% } %>
+            <% } %>
+        </div>
+        <script type="text/javascript" src="/js/index.js"></script>
+    </body>
+</HTML>
